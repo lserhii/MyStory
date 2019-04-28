@@ -1,0 +1,37 @@
+﻿@page "/profile"
+@using System.Timers
+
+
+<h1>Profile: Serhii Lukavenko</h1>
+
+<p>Current count: @currentCount</p>
+<p>Timer: @ticks</p>
+
+<button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
+
+@functions {
+    int currentCount = 0;
+    Timer CountDownTimer = new Timer();
+    int ticks = 0;
+
+    void Start()
+    {
+        CountDownTimer.Interval = 100;
+
+        CountDownTimer.Elapsed += OnTimedEvent;
+        CountDownTimer.Start();
+    }
+
+    void OnTimedEvent(Object source, ElapsedEventArgs e)
+    {
+        ticks++;
+        Console.WriteLine($"{ticks} Hohoho!!!");
+        base.StateHasChanged();
+    }
+
+    void IncrementCount()
+    {
+        Start();
+        currentCount++;
+    }
+}
